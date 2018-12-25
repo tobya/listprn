@@ -5,22 +5,33 @@ program listprn;
 {$R *.res}
 
 uses
-  System.SysUtils,
-  vcl.Printers;
 
+  classes, sysutils,
+  listprn_config in 'listprn_config.pas';
 
-
-  var I : Integer;
+var I, j : Integer;
+paramlist : TStringlist;
+cONFIG : TConfigLoader;
 begin
+  paramlist := TStringList.Create;
 
   try
-    { TODO -oUser -cConsole Main : Insert code here }
-    for I := 0 to Printer.Printers.Count -1 do
+
+     for j := 1 to ParamCount do
       begin
-        writeln(Printer.Printers.Strings[I]);
+       paramlist.Add(ParamStr(j));
       end;
+
+    Config := TConfigLoader.Create;
+
+    Config.load(paramlist);
+
+
   except
     on E: Exception do
+    begin
       Writeln(E.ClassName, ': ', E.Message);
+    end;
   end;
+  paramlist.free;
 end.
