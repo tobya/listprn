@@ -103,6 +103,24 @@ begin
       end;
          Output.Add('  ]}');
     end
+    else  if (id = '-V') or
+       (id = '--VERSION') then
+       begin
+         WriteOut('Version:0.2');
+       end
+    else  if (id = '-H') or
+        (id = '-?') or
+       (id = '--HELP') then
+       begin
+         Output.Add('ListPrn.exe');
+         Output.Add('Commandline utility for listing Windows Printers.');
+         Output.Add('SourceCode:https://github.com/tobya/listprn');
+         Output.Add('Version:0.2');
+         Output.Add('Call with no params to get list of printers');
+         Output.Add('-H :Help Message');
+         Output.Add('-J :Output as JSON  ');
+         Output.Add('-D :Show Default Printer');
+       end
     else
     begin
       HaltWithError(203,'Unknown Switch:' + pstr);
